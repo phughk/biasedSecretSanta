@@ -124,6 +124,28 @@ public class SecretSantaInterfaceTest {
         Assert.assertEquals(Sets.newHashSet(group1, group2), subject.getGroups());
     }
 
+    @Test
+    public void itIsPossibleToGetAnEntriesGroups() {
+
+        // given
+        Group group1 = new Group("Group 1");
+        Group group2 = new Group("Group 2");
+        Group group3 = new Group("Group 3");
+
+        Entry entry1 = new Entry("Remain bro");
+        Entry entry2 = new Entry("Bro 2");
+
+        //when
+        subject.addEntryToGroup(group1, entry1);
+        subject.addEntryToGroup(group2, entry1);
+        subject.addEntryToGroup(group2, entry2);
+        subject.addEntryToGroup(group3, entry2);
+
+        // then
+        Assert.assertEquals(Sets.newHashSet(group1, group2), subject.getGroups(entry1));
+        Assert.assertEquals(Sets.newHashSet(group2, group3), subject.getGroups(entry2));
+    }
+
     // End tests
 
     private Matcher<Collection<Entry>> thereAreThisManyEntries(int number) {

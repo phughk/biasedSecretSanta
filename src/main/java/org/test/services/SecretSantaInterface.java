@@ -48,6 +48,10 @@ public class SecretSantaInterface {
         return groups.keySet();
     }
 
+    public Set<Group> getGroups(Entry e) {
+        return groups.keySet().stream().filter(group -> groups.get(group).contains(e)).collect(Collectors.toSet());
+    }
+
     public Collection<Entry> getAllEntries() {
         return groups.values().stream().filter(entry -> entry!=null).collect(Collectors.toSet());
     }
