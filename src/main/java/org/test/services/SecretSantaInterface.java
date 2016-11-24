@@ -8,6 +8,7 @@ import org.test.models.Group;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -70,5 +71,13 @@ public class SecretSantaInterface {
         for (Group g: allGroups) {
             groups.get(g).remove(entry);
         }
+    }
+
+    public Set<Entry> findEntriesMatching(Group group, Predicate<Entry> predicate) {
+        return getEntries(group).stream().filter(predicate).collect(Collectors.toSet());
+    }
+
+    public Set<Entry> findAllEntriesMatching(Predicate<Entry> predicate) {
+        return getAllEntries().stream().filter(predicate).collect(Collectors.toSet());
     }
 }
